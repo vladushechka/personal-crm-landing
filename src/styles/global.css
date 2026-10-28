@@ -1,0 +1,3 @@
+/* Scan only src/ for class names, so Design/ files do not add stray CSS */
+@import "tailwindcss" source("../");
+@import "./tokens.css";

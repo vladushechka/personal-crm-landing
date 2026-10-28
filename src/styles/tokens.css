@@ -1,0 +1,101 @@
+/*
+ * Design tokens: the only place for colors, fonts, type sizes, line heights,
+ * spacing, radii, shadows and widths. Values come from Design/reference/
+ * (mobile-390.html and desktop-1440.html).
+ *
+ * Numeric names equal the value in the reference:
+ * text-17 is 17px, rounded-14 is 14px, leading-155 is line-height 1.55.
+ * Spacing uses a 4px step: p-6 is 24px, p-4.5 is 18px.
+ */
+@theme {
+  /* Drop Tailwind's default scales so only the values below exist */
+  --color-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+  --leading-*: initial;
+  --tracking-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --container-*: initial;
+  --breakpoint-*: initial;
+
+  /* Colors */
+  --color-ink: #1b2335; /* page background, text on the light button */
+  --color-line: #2e3850; /* dividers between blocks and list items */
+  --color-paper: #f5f3ee; /* main text, button background */
+  --color-white: #ffffff; /* button background on hover */
+  --color-muted: #b7bfce; /* secondary text, descriptions */
+  --color-card-text: #e9ecf3; /* text inside the planner page */
+  --color-accent: #8db4ff; /* italic accents, block numbers, dates, icons */
+  --color-accent-soft: rgb(141 180 255 / 0.14); /* icon tiles */
+  --color-glass: rgb(255 255 255 / 0.06); /* problem cards */
+  --color-glass-strong: rgb(255 255 255 / 0.07); /* planner page, final card */
+  --color-glass-border: rgb(255 255 255 / 0.1); /* problem cards, planner rows */
+  --color-glass-border-strong: rgb(255 255 255 / 0.12); /* planner page, final card */
+
+  /* Fonts */
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Golos Text", system-ui, sans-serif;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Type sizes */
+  --text-14: 14px;
+  --text-15: 15px;
+  --text-16: 16px;
+  --text-17: 17px;
+  --text-18: 18px;
+  --text-20: 20px;
+  --text-22: 22px;
+  --text-24: 24px;
+  --text-26: 26px;
+  --text-28: 28px;
+  --text-35: 35px;
+  /* Fluid desktop headings */
+  --text-h1: clamp(36px, 4.4vw, 64px);
+  --text-h2: clamp(28px, 3vw, 44px);
+  --text-h2-problem: clamp(28px, 3vw, 42px);
+  --text-h2-cta: clamp(28px, 3.4vw, 46px);
+
+  /* Line heights */
+  --leading-normal: normal;
+  --leading-108: 1.08;
+  --leading-110: 1.1;
+  --leading-115: 1.15;
+  --leading-120: 1.2;
+  --leading-130: 1.3;
+  --leading-140: 1.4;
+  --leading-150: 1.5;
+  --leading-155: 1.55;
+
+  /* Letter spacing */
+  --tracking-heading: -0.01em;
+
+  /* Spacing step */
+  --spacing: 4px;
+
+  /* Radii */
+  --radius-12: 12px; /* icon tiles */
+  --radius-14: 14px; /* buttons */
+  --radius-16: 16px; /* problem cards, mobile */
+  --radius-18: 18px; /* problem cards desktop, planner page mobile */
+  --radius-22: 22px; /* planner page desktop, final card mobile */
+  --radius-28: 28px; /* final card desktop */
+
+  /* Shadows */
+  --shadow-card: 0 18px 40px rgb(0 0 0 / 0.35);
+  --shadow-card-lg: 0 24px 60px rgb(0 0 0 / 0.35);
+
+  /* Max widths. Page and final card containers use box-content, as in the
+     reference: side padding is added outside these widths. */
+  --container-page: 1200px;
+  --container-hero-text: 560px;
+  --container-hero-card: 460px;
+  --container-problem-title: 900px;
+  --container-benefits-title: 760px;
+  --container-cta: 880px;
+  --container-cta-title: 680px;
+
+  /* Mobile layout below 1024px, desktop from lg */
+  --breakpoint-lg: 1024px;
+}

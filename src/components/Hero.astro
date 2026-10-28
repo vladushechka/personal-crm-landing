@@ -1,0 +1,42 @@
+---
+import CtaButton from "./CtaButton.astro";
+
+const notes = [
+  { date: "14 ноя", text: "ДР Лёши — подарить настолку" },
+  { date: "6 дек", text: "Свадьба Ани, она просила без цветов" },
+  { date: "пятн.", text: "Созвон с Димой: спросить про переезд" },
+];
+---
+
+<section
+  class="mx-auto box-content flex max-w-page flex-col gap-5 px-6 pt-6 pb-16 lg:flex-row lg:items-center lg:gap-16 lg:pt-22 lg:pb-28"
+>
+  <div class="flex min-w-0 flex-col gap-5 lg:grow lg:basis-130 lg:gap-7">
+    <h1 class="font-serif text-35 leading-110 font-bold tracking-heading lg:text-h1 lg:leading-108">
+      Помните каждую деталь о близких, друзьях и коллегах <span class="text-accent italic">без каши в голове</span>
+    </h1>
+    {/* Mobile shows only the first sentence with a line break, desktop shows the full text */}
+    <p class="text-17 leading-150 text-muted lg:max-w-hero-text lg:text-20 lg:leading-155">
+      Персональная CRM для тех, <br class="lg:hidden" />кому важны отношения.<span class="hidden lg:inline"> Сохраняйте дни рождения, важные даты, темы последних разговоров и заметки о людях в одном надежном месте.</span>
+    </p>
+    <CtaButton class="self-stretch lg:self-start" />
+  </div>
+
+  <div class="mt-4 flex min-w-0 justify-center lg:mt-0 lg:grow lg:basis-100">
+    <div
+      role="img"
+      aria-label="Страница заметок о друзьях в приложении"
+      class="flex w-full -rotate-[1.5deg] flex-col rounded-18 border border-glass-border-strong bg-glass-strong px-5 pt-5 pb-7 text-card-text shadow-card lg:max-w-hero-card lg:-rotate-2 lg:rounded-22 lg:px-7 lg:pt-7 lg:pb-9 lg:shadow-card-lg"
+    >
+      <div class="pb-2.5 font-serif text-18 font-semibold italic lg:pb-3.5 lg:text-22">Ноябрь — декабрь</div>
+      {
+        notes.map((note) => (
+          <div class="flex gap-3.5 border-t border-glass-border py-3 lg:gap-4.5 lg:py-4">
+            <span class="min-w-13 text-14 font-bold text-accent lg:min-w-15 lg:text-15">{note.date}</span>
+            <span class="text-15 leading-140 lg:text-17">{note.text}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

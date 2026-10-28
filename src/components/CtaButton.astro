@@ -1,0 +1,22 @@
+---
+import { APP_URL } from "../config";
+
+interface Props {
+  // Alignment and margins differ between Hero and Cta
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<a
+  href={APP_URL}
+  class:list={[
+    "rounded-14 bg-paper px-6 py-4.5 text-center text-17 font-semibold text-ink transition-colors hover:bg-white",
+    "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent",
+    "lg:px-9 lg:py-5 lg:text-18",
+    className,
+  ]}
+>
+  Перейти в приложение
+</a>

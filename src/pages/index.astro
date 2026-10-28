@@ -1,0 +1,26 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Problem from "../components/Problem.astro";
+import Solution from "../components/Solution.astro";
+import Benefits from "../components/Benefits.astro";
+import Cta from "../components/Cta.astro";
+import Footer from "../components/Footer.astro";
+
+const title = "Personal CRM — помните каждую деталь о близких";
+const description =
+  "Персональная CRM для тех, кому важны отношения. Сохраняйте дни рождения, важные даты, темы последних разговоров и заметки о людях в одном надежном месте.";
+---
+
+<Base title={title} description={description}>
+  <Header />
+  <main>
+    <Hero />
+    <Problem />
+    <Solution />
+    <Benefits />
+    <Cta />
+  </main>
+  <Footer />
+</Base>

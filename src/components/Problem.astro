@@ -1,0 +1,59 @@
+---
+import SectionNumber from "./SectionNumber.astro";
+
+// Icons are the inner SVG markup from Design/reference/
+const problems = [
+  {
+    title: "Забытые даты",
+    text: "Дни рождения теряются в переписках, а вспоминаются только через три дня после праздника.",
+    icon: '<rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4M10 14l4 4M14 14l-4 4"></path>',
+  },
+  {
+    title: "Хаос в заметках",
+    text: "Мысли о человеке записаны в стандартных заметках телефона, имя собаки — в Telegram-избранном, а ссылка на подарок — в закладках браузера.",
+    icon: '<path d="M4 4h10v10H4z"></path><path d="M10 10h10v10H10z"></path>',
+  },
+  {
+    title: "Неловкие паузы",
+    text: "При встрече сложно вспомнить, как зовут партнера коллеги, куда летал в отпуск знакомый или почему приятель искал хорошего стоматолога.",
+    icon: '<path d="M4 5h16v11H9l-5 4z"></path><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01"></path>',
+  },
+  {
+    title: "Ощущение вины",
+    text: "Кажется, что вы невнимательны к людям, хотя на самом деле у вас просто перегружена память.",
+    icon: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path>',
+  },
+];
+---
+
+<section class="border-t border-line">
+  <div class="mx-auto box-content flex max-w-page flex-col gap-6 px-6 py-14 lg:gap-8 lg:py-24">
+    <SectionNumber number="01" />
+    <h2 class="font-serif text-26 leading-120 font-bold lg:max-w-problem-title lg:text-h2-problem">
+      Знакомо чувство, когда забыл поздравить старого друга или не помнишь, о чем договорились на встрече месяц назад?
+    </h2>
+    <ul class="grid gap-3 lg:grid-cols-2 lg:gap-5">
+      {
+        problems.map((problem) => (
+          <li class="flex min-w-0 flex-col gap-1.5 rounded-16 border border-glass-border bg-glass p-4.5 lg:gap-2 lg:rounded-18 lg:p-7">
+            <span class="mb-1.5 flex size-10 items-center justify-center rounded-12 bg-accent-soft text-accent lg:mb-2 lg:size-11">
+              <svg
+                class="size-5.5 lg:size-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                set:html={problem.icon}
+              />
+            </span>
+            <h3 class="text-17 font-bold lg:text-20">{problem.title}</h3>
+            <p class="text-15 leading-150 text-muted lg:text-16 lg:leading-155">{problem.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
