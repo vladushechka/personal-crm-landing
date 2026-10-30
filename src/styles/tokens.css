@@ -96,6 +96,9 @@
   --container-cta: 880px;
   --container-cta-title: 680px;
 
-  /* Mobile layout below 1024px, desktop from lg */
+  /* Mobile layout below 1024px, desktop from lg.
+     Below xs (narrow phones) buttons get tighter side padding so the label
+     fits on one line inside the final card. */
+  --breakpoint-xs: 360px;
   --breakpoint-lg: 1024px;
 }
