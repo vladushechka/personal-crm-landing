@@ -1,0 +1,64 @@
+# Every push to main is a release: build dist/ and upload it to the server, nginx serves the folder.
+# The server key may only rsync into /var/www/web.vladmath.com (rrsync), so "/" below means that folder.
+# Secrets: DEPLOY_HOST, DEPLOY_SSH_KEY (private deploy key of user "landing"), DEPLOY_KNOWN_HOSTS.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-landing
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+
+      # pnpm version comes from "packageManager" in package.json
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      - name: Set up SSH to the server
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      - name: Upload dist/ to the server
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          rsync -rlt --delete --delay-updates --chmod=D755,F644 \
+            -e "ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
+            dist/ "landing@$DEPLOY_HOST:/"
+
+      - name: Smoke check - the site serves this build
+        run: |
+          expected="$(sha256sum < dist/index.html)"
+          for attempt in $(seq 1 10); do
+            if actual="$(curl -fsS https://web.vladmath.com/ | sha256sum)" && [ "$actual" = "$expected" ]; then
+              echo "https://web.vladmath.com/ answers 200 with the new index.html"
+              exit 0
+            fi
+            sleep 3
+          done
+          echo "https://web.vladmath.com/ does not serve the new build" >&2
+          exit 1
